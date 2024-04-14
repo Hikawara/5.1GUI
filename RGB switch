@@ -1,0 +1,50 @@
+  GNU nano 5.4                                                        switch.py                                                                 
+from tkinter import *
+import tkinter.font
+from gpiozero import LED
+import RPi.GPIO
+RPi.GPIO.setmode(RPi.GPIO.BCM)
+
+red = LED(13)
+green = LED(19)
+blue = LED(26)
+
+win = Tk()
+win.title("LED Toggle")
+myFont = tkinter.font.Font(family = 'Helvetica', size = 12, weight = "bold")
+
+def redToggle():
+        if red.is_lit:
+                red.off()
+                redButton["text"] = "Red LED on"
+        else:
+                red.on()
+                redButton["text"] = "Red LED off"
+
+def greenToggle():
+        if green.is_lit:
+                green.off()
+                greenButton["text"] = "Green LED On"
+        else:
+                green.on()
+                greenButton["text"] = "Green LED Off"
+
+def blueToggle():
+        if blue.is_lit:
+                blue.off()
+                blueButton["text"] = "Blue LED On"
+        else:
+                blue.on()
+                blueButton["text"] = "Blue LED Off"
+
+redButton = Button(win, text = "Red LED On", font = myFont, command = redToggle, bg = 'red', height = 1, width = 24)
+redButton.grid(row=0, column=0)
+
+greenButton = Button(win, text="Green LED On", font=myFont, command=greenToggle, bg='light green', height=1, width=24)
+greenButton.grid(row=0, column=1)
+
+blueButton = Button(win, text="Blue LED On", font=myFont, command=blueToggle, bg='light blue', height=1, width=24)
+blueButton.grid(row=0, column=2)
+
+win.mainloop()
+
